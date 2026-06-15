@@ -1,0 +1,190 @@
+:root {
+  color-scheme: light;
+  font-family: "Niramit", "Tahoma", sans-serif;
+  background: #eaf3fb;
+  color: #132235;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #eaf3fb;
+}
+
+.dashboard {
+  width: 100%;
+  min-height: 100vh;
+  padding: 18px;
+}
+
+.dashboardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 auto 16px;
+  max-width: 1900px;
+}
+
+.eyebrow {
+  margin: 0 0 2px;
+  color: #315f98;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 1.1;
+}
+
+.refreshStatus {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  color: #31506f;
+  font-size: 18px;
+}
+
+.liveDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 5px rgb(22 163 74 / 14%);
+}
+
+.patientTable {
+  display: grid;
+  gap: 10px;
+  max-width: 1900px;
+  margin: 0 auto;
+}
+
+.tableHeader,
+.patientRow {
+  display: grid;
+  grid-template-columns: minmax(280px, 30%) minmax(0, 70%);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.tableHeader {
+  color: white;
+  background: #174f8b;
+  font-size: clamp(28px, 3.2vw, 58px);
+  font-weight: 800;
+}
+
+.tableHeader > div,
+.patientRow > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(74px, 9vh, 120px);
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.tableHeader > div + div {
+  border-left: 3px solid rgb(255 255 255 / 55%);
+}
+
+/* เส้นแบ่งคอลัมน์ของข้อมูลผู้ป่วย */
+.patientRow > div + div {
+  border-left: 3px solid #9bbbd8;
+}
+
+.patientRow {
+  box-shadow: 0 2px 8px rgb(30 64 100 / 10%);
+  font-size: clamp(26px, 3vw, 46px);
+  font-weight: 800;
+}
+
+.status-5 {
+  color: white;
+  background: #b91c1c;
+}
+
+.status-6 {
+  color: #27131c;
+  background: #f3a9c0;
+}
+
+.status-7 {
+  color: #2b2400;
+  background: #f5ce36;
+}
+
+.status-8 {
+  color: white;
+  background: #15803d;
+}
+
+.status-default {
+  color: #172334;
+  background: white;
+}
+
+.messageRow {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  border-radius: 8px;
+  background: white;
+  color: #38516a;
+  font-size: 30px;
+}
+
+.errorMessage {
+  color: #b42318;
+}
+
+footer {
+  max-width: 1900px;
+  margin: 12px auto 0;
+  color: #54708b;
+  text-align: right;
+  font-size: 16px;
+}
+
+@media (max-width: 760px) {
+  .dashboard {
+    padding: 10px;
+  }
+
+  .dashboardHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tableHeader,
+  .patientRow {
+    grid-template-columns: 40% 60%;
+  }
+
+  .tableHeader {
+    font-size: 22px;
+  }
+
+  .patientRow {
+    font-size: 21px;
+  }
+
+  .tableHeader > div,
+  .patientRow > div {
+    min-height: 86px;
+    padding: 8px;
+  }
+}

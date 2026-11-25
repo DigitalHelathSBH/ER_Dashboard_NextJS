@@ -1,5 +1,9 @@
 import { isValidDate, normalizeSchedule, thaiDateParts } from "@/lib/doctorSchedule";
 
+// basePath ของแอป (server จริงตั้ง basePath "/er-dashboard" ใน next.config.mjs) Next ฝังค่าให้ตอน build
+// ใช้นำหน้า fetch และลิงก์ <a> ที่ Next ไม่เติมให้เอง
+export const BASE_PATH = process.env.__NEXT_ROUTER_BASEPATH || "";
+
 export function formatThaiDate(date) {
   const { day, month, year } = thaiDateParts(date);
   return `วันที่ ${day} เดือน ${month} พ.ศ. ${year}`;
@@ -16,7 +20,7 @@ export function formatThaiTime(value) {
 
 export async function requestSchedule(date, options = {}) {
   const response = await fetch(
-    `/api/doctor-schedule${date ? `?date=${encodeURIComponent(date)}` : ""}`,
+    `${BASE_PATH}/api/doctor-schedule${date ? `?date=${encodeURIComponent(date)}` : ""}`,
     { cache: "no-store", ...options }
   );
   if (!response.ok) {

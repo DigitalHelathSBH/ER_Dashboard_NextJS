@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { addDays, emptySchedule, isValidDate, normalizeSchedule, todayBangkok } from "@/lib/doctorSchedule";
 import ScheduleBoard from "../ScheduleBoard";
-import { formatThaiDate, formatThaiTime, requestSchedule } from "../scheduleClient";
+import { BASE_PATH, formatThaiDate, formatThaiTime, requestSchedule } from "../scheduleClient";
 import styles from "./edit.module.css";
 
 function replaceField(source, path, value) {
@@ -175,7 +175,7 @@ export default function ScheduleEditor() {
           <p className={styles.subtitle}>เลือกวันที่ กรอกชื่อแพทย์ แล้วกดบันทึก</p>
         </div>
         {/* A full navigation also triggers the native unsaved-change warning. */}
-        <a className={styles.link} href="/doctor-schedule">ดูจอแสดงผล</a>
+        <a className={styles.link} href={`${BASE_PATH}/doctor-schedule`}>ดูจอแสดงผล</a>
       </header>
       <form onSubmit={(event) => { event.preventDefault(); saveSchedule(); }}>
         <div className={styles.toolbar}>

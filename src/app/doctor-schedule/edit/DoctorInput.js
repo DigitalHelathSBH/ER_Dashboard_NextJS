@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import styles from "./DoctorInput.module.css";
+import { BASE_PATH } from "../scheduleClient";
 
 // ช่องกรอกชื่อแพทย์ที่ค้นจาก HIS ได้ ช่องเดียวใส่ได้หลายชื่อ คั่นด้วย , หรือ /
 // ค้นจากคำหลังตัวคั่นตัวสุดท้าย เลือกแล้วแทนคำนั้นด้วย "พ.ชื่อ"
@@ -38,7 +39,7 @@ export default function DoctorInput({ value, onChange, className, ...inputProps 
     const timer = window.setTimeout(async () => {
       setStatus("กำลังค้นหา...");
       try {
-        const response = await fetch(`/api/doctors?q=${encodeURIComponent(term)}`, {
+        const response = await fetch(`${BASE_PATH}/api/doctors?q=${encodeURIComponent(term)}`, {
           cache: "no-store",
           signal: controller.signal,
         });

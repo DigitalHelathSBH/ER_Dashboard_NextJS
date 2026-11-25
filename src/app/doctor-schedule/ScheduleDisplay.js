@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { addDays, todayBangkok } from "@/lib/doctorSchedule";
 import ScheduleBoard from "./ScheduleBoard";
-import { formatThaiDate, formatThaiTime, requestSchedule } from "./scheduleClient";
+import { BASE_PATH, formatThaiDate, formatThaiTime, requestSchedule } from "./scheduleClient";
 import styles from "./display.module.css";
 
 export default function ScheduleDisplay() {
@@ -82,11 +82,11 @@ export default function ScheduleDisplay() {
         : data?.schedule ? <ScheduleBoard schedule={data.schedule} />
           : data && data.date === date ? <div className={styles.message}>
             <p>ยังไม่ได้กรอกตารางเวรของวันนี้</p>
-            <a href="/doctor-schedule/edit">ไปหน้ากรอกตารางเวร</a>
+            <a href={`${BASE_PATH}/doctor-schedule/edit`}>ไปหน้ากรอกตารางเวร</a>
           </div> : <div className={styles.message}>ยังไม่มีข้อมูลที่แสดงได้</div>}
       <footer className={styles.footer}>
         <span>บันทึกล่าสุด: {formatThaiTime(data?.updatedAt)} (เวลาไทย)</span>
-        <a href="/doctor-schedule/edit">แก้ไข</a>
+        <a href={`${BASE_PATH}/doctor-schedule/edit`}>แก้ไข</a>
       </footer>
     </main>
   );

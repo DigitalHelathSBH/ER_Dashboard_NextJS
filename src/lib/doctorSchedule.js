@@ -5,8 +5,8 @@
 export const SHIFT_COLUMNS = [
   { key: "intern", label: "Intern 1 / Pool" },
   { key: "resident", label: "Resident" },
-  { key: "staffResus", label: "Staff Resus / T" },
-  { key: "staffNonResus", label: "Staff Non-Resus" },
+  { key: "staffResus", label: "Staff Trauma - Resus" },
+  { key: "staffNonResus", label: "Staff Non Trauma - Resus" },
 ];
 
 export const SHIFTS = [
@@ -31,17 +31,30 @@ export const SPECIALTIES = [
   { key: "URO", label: "URO", color: "#E9D5FF" },
   { key: "XRAY", label: "X-RAY", color: "#E2E8F0" },
   { key: "LAB", label: "ชันสูตร", color: "#A7F3D0" },
-  { key: "CONSULT", label: "CONSULT", color: "#FEF08A" },
-  { key: "LINE_A", label: "สาย A", color: "#BFDBFE" },
-  { key: "LINE_B", label: "สาย B", color: "#FECDD3" },
+  { key: "INT_PLASTIC", label: "Int. PLASTIC", color: "#FECDD3" },
+  { key: "INT_NEURO", label: "Int. NEURO", color: "#FEF08A" },
+  { key: "INT_URO", label: "Int. URO", color: "#BFDBFE" },
 ];
 
-// กล่อง "เวรตรวจการ" ด้านขวาของกระดาน (ใช้สีเดียวกับแถวสาขาที่ key ตรงกัน)
-export const INSPECTION = [
-  { key: "PLASTIC", label: "PLASTIC" },
-  { key: "NEURO", label: "NEURO" },
-  { key: "URO", label: "URO" },
-].map((row) => ({ ...row, color: SPECIALTIES.find((item) => item.key === row.key)?.color || "#CBD5E1" }));
+// กล่องด้านขวาของกระดาน แต่ละกล่องมีหัวข้อและแถวชื่อ (ข้อมูลเก็บที่ schedule.side[box.key][row.key])
+export const SIDE_BOXES = [
+  { key: "consultGenSx", title: "Consult GEN Sx", color: "#FED7AA", rows: [
+    { key: "lineA", label: "สาย A" },
+    { key: "lineB", label: "สาย B" },
+  ] },
+  { key: "consultStemi", title: "Consult STEMI", color: "#FECACA", rows: [
+    { key: "inHours", label: "ในเวลา" },
+    { key: "afterHours", label: "นอกเวลา" },
+  ] },
+  { key: "nurseInspection", title: "เวรตรวจการพยาบาล", color: "#FBCFE8", rows: [
+    { key: "line1", label: "สาย 1" },
+    { key: "line2", label: "สาย 2" },
+  ] },
+];
+
+// ข้อมูลที่บันทึกก่อนเปลี่ยนผัง (2026-11-25): ย้ายค่าเดิมมาไว้ที่ key ใหม่ตอนอ่าน
+const LEGACY_SPECIALTIES = { INT_PLASTIC: ["inspection", "PLASTIC"], INT_NEURO: ["inspection", "NEURO"], INT_URO: ["inspection", "URO"] };
+const LEGACY_SIDE = { consultGenSx: { lineA: ["specialties", "LINE_A"], lineB: ["specialties", "LINE_B"] } };
 
 export const MAX_TEXT = 500;
 
@@ -58,9 +71,12 @@ export function emptySchedule() {
   }
   const specialties = {};
   for (const row of SPECIALTIES) specialties[row.key] = "";
-  const inspection = {};
-  for (const row of INSPECTION) inspection[row.key] = "";
-  return { shifts, specialties, inspection, note: "" };
+  const side = {};
+  for (const box of SIDE_BOXES) {
+    side[box.key] = {};
+    for (const row of box.rows) side[box.key][row.key] = "";
+  }
+  return { shifts, specialties, side, note: "" };
 }
 
 function cleanText(value) {
@@ -78,11 +94,14 @@ export function normalizeSchedule(input) {
       result.shifts[shift.key][column.key] = cleanText(row[column.key]);
     }
   }
+  const legacy = (path) => path?.reduce((item, key) => item?.[key], source);
   for (const row of SPECIALTIES) {
-    result.specialties[row.key] = cleanText(source.specialties?.[row.key]);
+    result.specialties[row.key] = cleanText(source.specialties?.[row.key] ?? legacy(LEGACY_SPECIALTIES[row.key]));
   }
-  for (const row of INSPECTION) {
-    result.inspection[row.key] = cleanText(source.inspection?.[row.key]);
+  for (const box of SIDE_BOXES) {
+    for (const row of box.rows) {
+      result.side[box.key][row.key] = cleanText(source.side?.[box.key]?.[row.key] ?? legacy(LEGACY_SIDE[box.key]?.[row.key]));
+    }
   }
   result.note = cleanText(source.note);
   return result;

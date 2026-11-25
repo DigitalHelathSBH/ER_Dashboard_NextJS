@@ -22,7 +22,7 @@
 **ใช้ซ้ำได้ (อย่าเขียนใหม่)**
 - `src/app/doctor-schedule/ScheduleBoard.js`, `ScheduleBoard.module.css`: ผังตารางร่วมของหน้าแสดงผลและหน้ากรอก (ชื่อไฟล์ในแถว route อยู่ใต้โฟลเดอร์ของ route นั้น)
 - `src/app/doctor-schedule/scheduleClient.js`: เรียก API ฝั่ง client และจัดรูปแบบวันที่/เวลาไทยสำหรับสองหน้า
-- `src/lib/doctorSchedule.js`: รายการแถว/คอลัมน์ `SHIFTS SHIFT_COLUMNS SPECIALTIES INSPECTION`, `emptySchedule()`, `normalizeSchedule()`,
+- `src/lib/doctorSchedule.js`: รายการแถว/คอลัมน์ `SHIFTS SHIFT_COLUMNS SPECIALTIES SIDE_BOXES` (กล่องขวา: Consult GEN Sx, Consult STEMI, เวรตรวจการพยาบาล), `emptySchedule()`, `normalizeSchedule()`,
   `todayBangkok()`, `isValidDate()`, `thaiDateParts(date)` (วัน/เดือนไทย/ปี พ.ศ.), `addDays(date, n)`, `MAX_TEXT`
 - `src/app/doctor-schedule/edit/DoctorInput.js`: ช่องกรอกชื่อแพทย์พร้อมรายการค้นหาจาก `/api/doctors` (ใส่หลายชื่อคั่น , หรือ /)
 - `src/lib/db.js`: `getPool()`, `sql` (ใช้ฝั่ง server เท่านั้น)

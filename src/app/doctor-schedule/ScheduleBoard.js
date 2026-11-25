@@ -1,4 +1,4 @@
-import { INSPECTION, MAX_TEXT, SHIFTS, SHIFT_COLUMNS, SPECIALTIES } from "@/lib/doctorSchedule";
+import { MAX_TEXT, SHIFTS, SHIFT_COLUMNS, SIDE_BOXES, SPECIALTIES } from "@/lib/doctorSchedule";
 import DoctorInput from "./edit/DoctorInput";
 import styles from "./ScheduleBoard.module.css";
 
@@ -57,7 +57,7 @@ export default function ScheduleBoard({ schedule, onChange, disabled = false }) 
         <section aria-label="แพทย์เฉพาะทาง" className={`${styles.card} ${styles.specialties}`}>
           {SPECIALTIES.map((row) => (
             <div className={styles.row} key={row.key} style={{ "--c": row.color }}>
-              <label className={styles.colorLabel} htmlFor={editable ? `specialty-${row.key}` : undefined}>
+              <label className={`${styles.colorLabel} ${row.label.length > 7 ? styles.longLabel : ""}`} htmlFor={editable ? `specialty-${row.key}` : undefined}>
                 {row.label}
               </label>
               <div className={styles.nameCell}>
@@ -71,15 +71,18 @@ export default function ScheduleBoard({ schedule, onChange, disabled = false }) 
           ))}
         </section>
         <aside className={styles.side}>
-          <section className={`${styles.card} ${styles.inspection}`} aria-labelledby="inspection-title">
-            <h2 id="inspection-title" className={styles.sectionTitle}>เวรตรวจการ</h2>
-            {INSPECTION.map((row) => (
-              <div className={styles.inspectionRow} key={row.key} style={{ "--c": row.color }}>
-                <div className={styles.colorLabel}>{row.label}</div>
-                <div className={styles.nameCell}>{field(["inspection", row.key], `เวรตรวจการ ${row.label}`)}</div>
-              </div>
-            ))}
-          </section>
+          {SIDE_BOXES.map((box) => (
+            <section key={box.key} className={`${styles.card} ${styles.sideBox}`} aria-labelledby={`side-${box.key}`}
+              style={{ "--c": box.color }}>
+              <h2 id={`side-${box.key}`} className={styles.sectionTitle}>{box.title}</h2>
+              {box.rows.map((row) => (
+                <div className={styles.row} key={row.key}>
+                  <div className={styles.colorLabel}>{row.label}</div>
+                  <div className={styles.nameCell}>{field(["side", box.key, row.key], `${box.title} ${row.label}`)}</div>
+                </div>
+              ))}
+            </section>
+          ))}
           {(editable || schedule.note) && (
             <section className={`${styles.card} ${styles.note}`}>
               <h2 className={styles.sectionTitle}><label htmlFor={editable ? "schedule-note" : undefined}>หมายเหตุ</label></h2>

@@ -1,0 +1,203 @@
+/* ผังตารางแพทย์เวร ใช้ร่วมกันทั้งจอแสดงผลและหน้ากรอก
+   สีแถบแต่ละแถวมาจาก --c (กำหนดใน src/lib/doctorSchedule.js) */
+.board {
+  --label-w: 155px; /* ความกว้างป้ายสี ใช้ร่วมกันทั้งคอลัมน์ เช้า/บ่าย/ดึก และแถว SUR, MED, ... */
+  --ink: #0f172a;
+  --muted: #94a3b8;
+  --card: #ffffff;
+  --radius: 14px;
+  --gap: 5px;
+  font-family: "IBM Plex Sans Thai", "Noto Sans Thai", "Leelawadee UI", "Segoe UI", Tahoma, sans-serif;
+  font-size: clamp(18px, 1.36vw, 28px);
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%), 0 8px 24px rgb(15 23 42 / 6%);
+  padding: 10px;
+  min-width: 0;
+}
+
+/* พื้นแถวใช้สีแถบจางๆ (color-mix) ช่วยไล่สายตาตามแถว มี fallback สีเทาอ่อนสำหรับเบราว์เซอร์เก่า */
+
+/* ---------- ตารางเวร เช้า/บ่าย/ดึก ----------
+   border-spacing = 0 เพื่อให้หัวตาราง 2 ชั้นติดกันเป็นแถบเดียว ช่องว่างระหว่างแถวใช้ขอบบนสีเดียวกับการ์ดแทน */
+.shifts {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.shifts th, .shifts td { padding: 6px 14px; border: 0; }
+.shifts thead th {
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.shifts thead tr:first-child th:first-child { border-radius: 10px 0 0 10px; }
+.shifts thead tr:first-child th:last-child { border-top-right-radius: 10px; }
+.shifts thead tr:last-child th:last-child { border-bottom-right-radius: 10px; }
+.shifts thead th[colspan] { padding-bottom: 3px; box-shadow: inset 0 -1px 0 rgb(248 250 252 / 18%); }
+.shifts thead tr + tr th { padding-top: 3px; color: #cbd5e1; font-size: 0.7em; }
+.shifts .shiftLabel { width: var(--label-w); }
+.shifts tbody th, .shifts tbody td {
+  border-top: var(--gap) solid var(--card);
+  background-clip: padding-box;
+}
+.shifts tbody td {
+  height: 45px;
+  vertical-align: middle;
+  background-color: #f8fafc;
+  background-color: color-mix(in srgb, var(--c) 8%, white);
+}
+.shifts tbody td + td { box-shadow: inset 1px 0 0 rgb(15 23 42 / 6%); }
+.shifts tbody td:last-child { border-radius: 0 10px 10px 0; }
+.shifts .colorLabel { display: table-cell; text-align: center; vertical-align: middle; border-radius: 10px 0 0 10px; }
+
+/* ---------- แถวสาขา ---------- */
+.lowerBoard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 24%);
+  gap: 14px;
+  margin-top: 14px;
+  align-items: start;
+}
+.specialties { display: grid; gap: var(--gap); }
+.row {
+  display: grid;
+  grid-template-columns: var(--label-w) minmax(0, 1fr);
+  min-height: 35px;
+  border-radius: 10px;
+  overflow: visible;
+  background: #f8fafc;
+  background: color-mix(in srgb, var(--c) 8%, white);
+}
+
+.colorLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 10px 0 0 10px;
+  background: var(--c, #334155);
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 1px rgb(0 0 0 / 18%);
+}
+.nameCell { min-width: 0; padding: 3px 14px; display: flex; align-items: center; }
+.value { white-space: pre-wrap; overflow-wrap: anywhere; font-weight: 500; }
+.empty { color: var(--muted); font-weight: 400; }
+
+/* ---------- เวรตรวจการ / หมายเหตุ ---------- */
+.side { display: grid; gap: 14px; min-width: 0; }
+.inspection, .note { display: grid; gap: var(--gap); }
+.sectionTitle {
+  margin: 2px 4px 6px;
+  color: #0f172a;
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.inspectionRow {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  background: color-mix(in srgb, var(--c) 8%, white);
+  box-shadow: inset 4px 0 0 var(--c);
+}
+.inspectionRow .colorLabel {
+  justify-self: start;
+  padding: 1px 12px;
+  border-radius: 999px;
+  font-size: 0.7em;
+}
+.inspectionRow .nameCell { min-height: 1.6em; padding: 0; }
+.noteText { margin: 0; padding: 4px 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* ---------- ช่องกรอก (หน้ากรอก) ---------- */
+.input, .textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input:hover, .textarea:hover { border-color: #94a3b8; }
+.input:focus-visible, .textarea:focus-visible {
+  outline: none;
+  border-color: var(--c, #2563eb);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c, #2563eb) 25%, transparent);
+}
+.input:disabled, .textarea:disabled { background: #f1f5f9; color: #64748b; }
+.textarea { resize: vertical; }
+.editable { font-size: 17px; }
+.editable .row { min-height: 50px; }
+.editable .nameCell { padding: 6px 8px; }
+.editable .shifts tbody td { padding: 6px; }
+.editable .inspectionRow .nameCell { min-height: auto; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 1000px) {
+  .lowerBoard { grid-template-columns: minmax(0, 1fr); }
+  .side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .board { --label-w: 130px; }
+  .shifts th, .shifts td { padding: 6px; }
+}
+
+@media (max-width: 600px) {
+  .board { font-size: 16px; --label-w: 96px; }
+  .card { padding: 6px; }
+  .shifts { table-layout: auto; }
+  .shifts th, .shifts td { padding: 5px 3px; overflow-wrap: anywhere; }
+  .shifts thead th { font-size: 11px; }
+  .shifts .input { padding: 8px 4px; }
+  .side { grid-template-columns: minmax(0, 1fr); }
+  .colorLabel { padding: 5px; }
+}
+
+/* จอทีวี: ขยายตัวอักษรและความสูงแถวให้ตารางเต็มจอ 1920x1080 พอดีโดยไม่ต้องเลื่อน */
+@media (min-width: 1500px) and (min-height: 900px) {
+  .board:not(.editable) {
+    --label-w: 220px;
+    --gap: 4px;
+    font-size: clamp(20px, min(1.45vw, 2.5vh), 40px);
+  }
+  .board:not(.editable) .shifts tbody td { height: 4vh; }
+  .board:not(.editable) .row { min-height: 3.2vh; }
+  .board:not(.editable) .nameCell,
+  .board:not(.editable) .specialties .colorLabel { padding-top: 0; padding-bottom: 0; }
+  .board:not(.editable) .inspectionRow { padding: 1.2vh 14px; }
+}
+
+/* จอทีวีแนวตั้ง (เช่น 1080x1920): ตารางสาขาเต็มความกว้าง เวรตรวจการเรียงเป็นแถวเดียวด้านล่าง */
+@media (orientation: portrait) and (min-width: 900px) and (min-height: 1500px) {
+  .board:not(.editable) {
+    --label-w: 190px;
+    --gap: 5px;
+    font-size: clamp(22px, min(2.7vw, 1.55vh), 44px);
+  }
+  .board:not(.editable) .shifts tbody td { height: 4.4vh; }
+  .board:not(.editable) .lowerBoard { grid-template-columns: minmax(0, 1fr); }
+  .board:not(.editable) .row { min-height: 3.45vh; }
+  .board:not(.editable) .nameCell,
+  .board:not(.editable) .specialties .colorLabel { padding-top: 0; padding-bottom: 0; }
+  .board:not(.editable) .side { grid-template-columns: minmax(0, 1fr); }
+  .board:not(.editable) .inspection { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .board:not(.editable) .inspection .sectionTitle { grid-column: 1 / -1; }
+  .board:not(.editable) .inspectionRow { min-height: 6vh; align-content: start; }
+}

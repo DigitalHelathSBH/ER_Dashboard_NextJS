@@ -39,3 +39,10 @@ npm start
 
 ค่าเริ่มต้นจะอัปเดตทุก 20 วินาที หากต้องการเปลี่ยนให้แก้
 `NEXT_PUBLIC_REFRESH_INTERVAL` ใน `.env.local` โดยมีหน่วยเป็นมิลลิวินาที
+
+## ตารางแพทย์เวร ER
+
+- จอแสดงผล: `/doctor-schedule` (รองรับทีวีแนวนอน 1920x1080 และแนวตั้ง 1080x1920)
+- หน้ากรอกรายวัน: `/doctor-schedule/edit` (ค้นชื่อแพทย์จาก `HNDOCTOR` ของ HIS)
+- เก็บข้อมูลที่ตาราง `Saraburi.dbo.ER_DoctorSchedule` สร้างครั้งแรกด้วย `sql/er_doctor_schedule.sql`
+- เพิ่ม/ลด/เปลี่ยนชื่อแถวหรือสีแถบ แก้ที่ `src/lib/doctorSchedule.js`

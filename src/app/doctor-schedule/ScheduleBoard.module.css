@@ -91,6 +91,7 @@
   letter-spacing: 0.03em;
   white-space: nowrap;
 }
+.row.rowNoLabel { grid-template-columns: minmax(0, 1fr); box-shadow: inset 4px 0 0 var(--c); } /* แถวไม่มีป้าย แสดงแถบสีบางๆ ด้านซ้ายแทน */
 .longLabel { font-size: 0.85em; letter-spacing: 0; } /* ป้ายยาว เช่น Int. PLASTIC ให้อยู่บรรทัดเดียว */
 .nameCell { min-width: 0; padding: 3px 14px; display: flex; align-items: center; }
 .value { white-space: pre-wrap; overflow-wrap: anywhere; font-weight: 500; }

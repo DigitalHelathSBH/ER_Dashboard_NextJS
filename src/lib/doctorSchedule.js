@@ -36,7 +36,7 @@ export const SPECIALTIES = [
   { key: "INT_URO", label: "Int. URO", color: "#BFDBFE" },
 ];
 
-// กล่องด้านขวาของกระดาน แต่ละกล่องมีหัวข้อและแถวชื่อ (ข้อมูลเก็บที่ schedule.side[box.key][row.key])
+// กล่องด้านขวาของกระดาน แต่ละกล่องมีหัวข้อและแถวชื่อ (row.label ว่าง = ไม่มีป้าย) (ข้อมูลเก็บที่ schedule.side[box.key][row.key])
 export const SIDE_BOXES = [
   { key: "consultGenSx", title: "Consult GEN Sx", color: "#FED7AA", rows: [
     { key: "lineA", label: "สาย A" },
@@ -45,6 +45,10 @@ export const SIDE_BOXES = [
   { key: "consultStemi", title: "Consult STEMI", color: "#FECACA", rows: [
     { key: "inHours", label: "ในเวลา" },
     { key: "afterHours", label: "นอกเวลา" },
+  ] },
+  // label ว่าง = ช่องชื่อเต็มความกว้าง ไม่มีป้าย
+  { key: "consultSft", title: "Consult SFT", color: "#C7D2FE", rows: [
+    { key: "name", label: "" },
   ] },
   { key: "nurseInspection", title: "เวรตรวจการพยาบาล", color: "#FBCFE8", rows: [
     { key: "line1", label: "สาย 1" },

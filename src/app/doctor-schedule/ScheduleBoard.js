@@ -76,9 +76,9 @@ export default function ScheduleBoard({ schedule, onChange, disabled = false }) 
               style={{ "--c": box.color }}>
               <h2 id={`side-${box.key}`} className={styles.sectionTitle}>{box.title}</h2>
               {box.rows.map((row) => (
-                <div className={styles.row} key={row.key}>
-                  <div className={styles.colorLabel}>{row.label}</div>
-                  <div className={styles.nameCell}>{field(["side", box.key, row.key], `${box.title} ${row.label}`)}</div>
+                <div className={`${styles.row} ${row.label ? "" : styles.rowNoLabel}`} key={row.key}>
+                  {row.label && <div className={styles.colorLabel}>{row.label}</div>}
+                  <div className={styles.nameCell}>{field(["side", box.key, row.key], `${box.title} ${row.label}`.trim())}</div>
                 </div>
               ))}
             </section>

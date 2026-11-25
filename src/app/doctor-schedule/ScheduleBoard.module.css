@@ -54,7 +54,7 @@
   height: 45px;
   vertical-align: middle;
   background-color: #f8fafc;
-  background-color: color-mix(in srgb, var(--c) 22%, white);
+  background-color: color-mix(in srgb, var(--c) 14%, white);
 }
 .shifts tbody td + td { box-shadow: inset 1px 0 0 rgb(15 23 42 / 6%); }
 .shifts tbody td:last-child { border-radius: 0 10px 10px 0; }
@@ -76,7 +76,7 @@
   border-radius: 10px;
   overflow: visible;
   background: #f8fafc;
-  background: color-mix(in srgb, var(--c) 22%, white);
+  background: color-mix(in srgb, var(--c) 14%, white);
 }
 
 .colorLabel {
@@ -111,7 +111,7 @@
   padding: 10px 12px;
   border-radius: 10px;
   background: #f8fafc;
-  background: color-mix(in srgb, var(--c) 22%, white);
+  background: color-mix(in srgb, var(--c) 14%, white);
   box-shadow: inset 4px 0 0 var(--c);
 }
 .inspectionRow .colorLabel {

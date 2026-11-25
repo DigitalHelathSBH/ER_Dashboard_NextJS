@@ -10,30 +10,30 @@ export const SHIFT_COLUMNS = [
 ];
 
 export const SHIFTS = [
-  { key: "morning", label: "เช้า", color: "#FDE68A" },
-  { key: "afternoon", label: "บ่าย", color: "#FDBA74" },
-  { key: "night", label: "ดึก", color: "#C4B5FD" },
+  { key: "morning", label: "เช้า", color: "#FEF3C7" },
+  { key: "afternoon", label: "บ่าย", color: "#FED7AA" },
+  { key: "night", label: "ดึก", color: "#DDD6FE" },
 ];
 
 // แถวแพทย์เฉพาะทาง (ช่องข้อความเดียวต่อแถว)
 export const SPECIALTIES = [
-  { key: "SUR", label: "SUR", color: "#FCA5A5" },
-  { key: "MED", label: "MED", color: "#86EFAC" },
-  { key: "PED", label: "PED", color: "#7DD3FC" },
-  { key: "OBS", label: "OBS", color: "#F9A8D4" },
-  { key: "EYE", label: "EYE", color: "#5EEAD4" },
-  { key: "ENT", label: "ENT", color: "#FCD34D" },
-  { key: "CVT", label: "CVT", color: "#A5B4FC" },
-  { key: "NEURO", label: "NEURO", color: "#BEF264" },
-  { key: "ORTHO", label: "ORTHO", color: "#F0ABFC" },
-  { key: "PLASTIC", label: "PLASTIC", color: "#67E8F9" },
-  { key: "PED_SUR", label: "PED-SUR", color: "#FFB4A2" },
-  { key: "URO", label: "URO", color: "#D8B4FE" },
-  { key: "XRAY", label: "X-RAY", color: "#CBD5E1" },
-  { key: "LAB", label: "ชันสูตร", color: "#6EE7B7" },
-  { key: "CONSULT", label: "CONSULT", color: "#FDE047" },
-  { key: "LINE_A", label: "สาย A", color: "#93C5FD" },
-  { key: "LINE_B", label: "สาย B", color: "#FDA4AF" },
+  { key: "SUR", label: "SUR", color: "#FECACA" },
+  { key: "MED", label: "MED", color: "#BBF7D0" },
+  { key: "PED", label: "PED", color: "#BAE6FD" },
+  { key: "OBS", label: "OBS", color: "#FBCFE8" },
+  { key: "EYE", label: "EYE", color: "#99F6E4" },
+  { key: "ENT", label: "ENT", color: "#FDE68A" },
+  { key: "CVT", label: "CVT", color: "#C7D2FE" },
+  { key: "NEURO", label: "NEURO", color: "#D9F99D" },
+  { key: "ORTHO", label: "ORTHO", color: "#F5D0FE" },
+  { key: "PLASTIC", label: "PLASTIC", color: "#A5F3FC" },
+  { key: "PED_SUR", label: "PED-SUR", color: "#FFD0C2" },
+  { key: "URO", label: "URO", color: "#E9D5FF" },
+  { key: "XRAY", label: "X-RAY", color: "#E2E8F0" },
+  { key: "LAB", label: "ชันสูตร", color: "#A7F3D0" },
+  { key: "CONSULT", label: "CONSULT", color: "#FEF08A" },
+  { key: "LINE_A", label: "สาย A", color: "#BFDBFE" },
+  { key: "LINE_B", label: "สาย B", color: "#FECDD3" },
 ];
 
 // กล่อง "เวรตรวจการ" ด้านขวาของกระดาน (ใช้สีเดียวกับแถวสาขาที่ key ตรงกัน)

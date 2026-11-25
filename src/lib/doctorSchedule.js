@@ -1,5 +1,5 @@
 // โครงสร้างตารางเวรแพทย์ ER ใช้ร่วมกันทั้งหน้าแสดงผล หน้ากรอก และ API
-// เพิ่ม/ลด/เปลี่ยนชื่อแถว และสีแถบ (color) ได้ที่นี่ที่เดียว สีควรเข้มพอให้ตัวอักษรขาวอ่านออก (key ต้องไม่ซ้ำ และอย่าเปลี่ยน key เดิมเพราะข้อมูลเก่าผูกกับ key)
+// เพิ่ม/ลด/เปลี่ยนชื่อแถว และสีแถบ (color) ได้ที่นี่ที่เดียว ใช้โทนพาสเทลอ่อน (ตัวอักษรบนแถบเป็นสีเข้ม) (key ต้องไม่ซ้ำ และอย่าเปลี่ยน key เดิมเพราะข้อมูลเก่าผูกกับ key)
 
 // คอลัมน์ของเวรเช้า/บ่าย/ดึก
 export const SHIFT_COLUMNS = [
@@ -10,30 +10,30 @@ export const SHIFT_COLUMNS = [
 ];
 
 export const SHIFTS = [
-  { key: "morning", label: "เช้า", color: "#0284C7" },
-  { key: "afternoon", label: "บ่าย", color: "#EA580C" },
-  { key: "night", label: "ดึก", color: "#3730A3" },
+  { key: "morning", label: "เช้า", color: "#FDE68A" },
+  { key: "afternoon", label: "บ่าย", color: "#FDBA74" },
+  { key: "night", label: "ดึก", color: "#C4B5FD" },
 ];
 
 // แถวแพทย์เฉพาะทาง (ช่องข้อความเดียวต่อแถว)
 export const SPECIALTIES = [
-  { key: "SUR", label: "SUR", color: "#B91C1C" },
-  { key: "MED", label: "MED", color: "#15803D" },
-  { key: "PED", label: "PED", color: "#0369A1" },
-  { key: "OBS", label: "OBS", color: "#BE185D" },
-  { key: "EYE", label: "EYE", color: "#0F766E" },
-  { key: "ENT", label: "ENT", color: "#B45309" },
-  { key: "CVT", label: "CVT", color: "#4338CA" },
-  { key: "NEURO", label: "NEURO", color: "#4D7C0F" },
-  { key: "ORTHO", label: "ORTHO", color: "#A21CAF" },
-  { key: "PLASTIC", label: "PLASTIC", color: "#0E7490" },
-  { key: "PED_SUR", label: "PED-SUR", color: "#C2410C" },
-  { key: "URO", label: "URO", color: "#6D28D9" },
-  { key: "XRAY", label: "X-RAY", color: "#334155" },
-  { key: "LAB", label: "ชันสูตร", color: "#047857" },
-  { key: "CONSULT", label: "CONSULT", color: "#A16207" },
-  { key: "LINE_A", label: "สาย A", color: "#1D4ED8" },
-  { key: "LINE_B", label: "สาย B", color: "#BE123C" },
+  { key: "SUR", label: "SUR", color: "#FCA5A5" },
+  { key: "MED", label: "MED", color: "#86EFAC" },
+  { key: "PED", label: "PED", color: "#7DD3FC" },
+  { key: "OBS", label: "OBS", color: "#F9A8D4" },
+  { key: "EYE", label: "EYE", color: "#5EEAD4" },
+  { key: "ENT", label: "ENT", color: "#FCD34D" },
+  { key: "CVT", label: "CVT", color: "#A5B4FC" },
+  { key: "NEURO", label: "NEURO", color: "#BEF264" },
+  { key: "ORTHO", label: "ORTHO", color: "#F0ABFC" },
+  { key: "PLASTIC", label: "PLASTIC", color: "#67E8F9" },
+  { key: "PED_SUR", label: "PED-SUR", color: "#FFB4A2" },
+  { key: "URO", label: "URO", color: "#D8B4FE" },
+  { key: "XRAY", label: "X-RAY", color: "#CBD5E1" },
+  { key: "LAB", label: "ชันสูตร", color: "#6EE7B7" },
+  { key: "CONSULT", label: "CONSULT", color: "#FDE047" },
+  { key: "LINE_A", label: "สาย A", color: "#93C5FD" },
+  { key: "LINE_B", label: "สาย B", color: "#FDA4AF" },
 ];
 
 // กล่อง "เวรตรวจการ" ด้านขวาของกระดาน (ใช้สีเดียวกับแถวสาขาที่ key ตรงกัน)
@@ -41,7 +41,7 @@ export const INSPECTION = [
   { key: "PLASTIC", label: "PLASTIC" },
   { key: "NEURO", label: "NEURO" },
   { key: "URO", label: "URO" },
-].map((row) => ({ ...row, color: SPECIALTIES.find((item) => item.key === row.key)?.color || "#334155" }));
+].map((row) => ({ ...row, color: SPECIALTIES.find((item) => item.key === row.key)?.color || "#CBD5E1" }));
 
 export const MAX_TEXT = 500;
 
